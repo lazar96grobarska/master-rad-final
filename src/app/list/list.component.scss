@@ -1,0 +1,27 @@
+:host {
+    display: block;
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        width: 100%;
+    }
+
+    li {
+        margin: 0;
+        padding: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .container {
+        width: 100%;
+        max-height: inherit;
+        overflow: auto;
+        position: relative;
+        box-sizing: border-box;
+    }
+}

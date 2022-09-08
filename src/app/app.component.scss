@@ -1,0 +1,24 @@
+td,
+th {
+   border: 1px solid;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+   height: 30px;
+}
+
+table {
+   border-collapse: collapse;
+}
+
+ul {
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+   width: 100%;
+}
+
+li {
+   height: 30px;
+   line-height: 30px;
+}

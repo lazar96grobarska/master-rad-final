@@ -1,0 +1,54 @@
+:host {
+  table {
+    border-spacing: 0;
+  }
+
+  tbody {
+    position: absolute;
+  }
+
+  th {
+    position: sticky;
+    top: 0;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+    background: lightgray;
+    z-index: 1;
+  }
+
+  td {
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+
+  th,
+  td {
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  table th:first-child,
+  table td:first-child {
+    border-left: 1px solid;
+  }
+
+  .container {
+    width: 100%;
+    max-height: inherit;
+    overflow: auto;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .scroll-placeholder {
+    visibility: hidden;
+  }
+
+  .cell-content {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}

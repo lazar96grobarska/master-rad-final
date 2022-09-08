@@ -1,0 +1,20 @@
+<div class="container" #scrollableElement>
+  <div style="visibility: hidden" [style.height.px]="listHeight"></div>
+  <ul style="position: absolute" [style.top.px]="contentTopPosition">
+    <ng-container *ngFor="let item of visibleItems">
+      <li *ngIf="item.index != null" [style.height.px]="itemHeight" [style.min-height.px]="itemHeight"
+        [style.max-height.px]="itemHeight" [style.line-height.px]="itemHeight" [title]="item.text">
+        <ng-container *ngTemplateOutlet="
+              itemTemplate ?? defaultItemTemplate;
+              context: {
+                $implicit: items[item.index],
+                index: item.index
+              }
+              "></ng-container>
+        <ng-template #defaultItemTemplate>
+          {{ item.text }}
+        </ng-template>
+      </li>
+    </ng-container>
+  </ul>
+</div>

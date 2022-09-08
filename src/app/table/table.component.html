@@ -1,0 +1,61 @@
+<div class="container" #scrollableElement>
+  <div class="scroll-placeholder" [style.width.px]="tableWidth"></div>
+  <table [style.margin-left.px]="contentLeftPosition">
+    <thead>
+      <tr *ngIf="headerCells">
+        <ng-container *ngFor="let cell of headerCells; trackBy: trackByIndex">
+          <th *ngIf="cell.columnIndex != null" [style.width.px]="allColumns[cell.columnIndex].columnWidth"
+            [style.min-width.px]="allColumns[cell.columnIndex].columnWidth"
+            [style.max-width.px]="allColumns[cell.columnIndex].columnWidth">
+            <div [style.height.px]="rowHeight - 1" [style.max-height.px]="rowHeight - 1"
+              [style.min-height.px]="rowHeight - 1" [style.line-height.px]="rowHeight - 1" class="cell-content"
+              [title]="cell.text">
+              <ng-container *ngTemplateOutlet="
+                  allColumns[cell.columnIndex].headerTemplate
+                  ? allColumns[cell.columnIndex].headerTemplate
+                  : defaultHeaderTemplate;
+                  context: {
+                    $implicit: allColumns[cell.columnIndex],
+                    columnIndex: cell.columnIndex
+                  }
+                  ">
+              </ng-container>
+              <ng-template #defaultHeaderTemplate>
+                {{ cell.text }}
+              </ng-template>
+            </div>
+          </th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tr class="scroll-placeholder" [style.height.px]="tableHeight"></tr>
+    <tbody [style.left.px]="contentLeftPosition" [style.top.px]="contentTopPosition" [style.margin-top.px]="rowHeight">
+      <ng-container *ngFor="let row of flatCells; trackBy: trackByIndex">
+        <tr *ngIf="row.length && row[0].rowIndex != null">
+          <ng-container *ngFor="let cell of row; trackBy: trackByIndex">
+            <td *ngIf="cell.columnIndex != null" [style.width.px]="allColumns[cell.columnIndex].columnWidth"
+              [style.min-width.px]="allColumns[cell.columnIndex].columnWidth"
+              [style.max-width.px]="allColumns[cell.columnIndex].columnWidth">
+              <div [style.height.px]="rowHeight - 1" [style.max-height.px]="rowHeight - 1"
+                [style.min-height.px]="rowHeight - 1" [style.line-height.px]="rowHeight - 1" class="cell-content"
+                [title]="cell.text">
+                <ng-container *ngTemplateOutlet="
+                      allColumns[cell.columnIndex].cellTemplate ?? defaultCellTemplate;
+                      context: {
+                        $implicit: items[cell.rowIndex],
+                        rowIndex: cell.columnIndex,
+                        columnIndex: cell.columnIndex,
+                        column: allColumns[cell.columnIndex]
+                      }
+                      "></ng-container>
+                <ng-template #defaultCellTemplate>
+                  {{ cell.text }}
+                </ng-template>
+              </div>
+            </td>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
